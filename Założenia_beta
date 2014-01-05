@@ -1,0 +1,12 @@
+RAINBOW CODING
+Założenia projektowe.
+Projekt RAINBOW CODING ma na celu stworzenie platformy aplikacji internetowej, która będzie służyła do interaktywnego tworzenia kodu źródłowego wielu języków programowania. 
+Platforma będzie w sposób intuicyjny zaznaczała (kolorowała) składnie programów.
+Aplikacja będzie pozwalała na dodawanie do fragmentów kodu notatek, które posłużą programiście w lepszym zrozumieniu kodu w późniejszej fazie projektowej podczas jej analizy, bądź innemu deweloperowi ze wskazówkami, co pozostało do zrobienia.
+Platforma internetowa zrewolucjonizuję pracę grupową podczas tworzenia aplikacji, nie tyle ułatwiając komunikację użytkowników, co wręcz integrując ich ze sobą. Pozwoli na swobodną analizę poprzednich wersji kodu, jak i jego kompletny przegląd przez testerów.
+
+TODO:
+Lista z wyborem języka kodzenia i co za tym pójdzie kolorowanie jego składni. – Do decyzji ile ich będzie.
+Jakieś okno w którym będzie można zobaczyć poprzednie wersję tego kodu, aktualnie sprawdzanego. – To nie powinno być jakieś mega trudna – zapisywać jakiś backup przy nowym zapisie, wyświetlanie go + zrobienie diffa na dwóch tekstach.
+Opcja z prawym przyciskiem myszu/ buttonem – Dodaj notatkę + na front endzie musiało by się to gdzieś pojawiać – POMYSŁ żeby była to pineska przy linii?
+Pomysł, żeby dodać opcje zapamiętywania, w którym miejscu zatrzymaliśmy się przy analizie kodu? – Zapisanie przy nazwie pola z ilością znaku przed kursorem np?
