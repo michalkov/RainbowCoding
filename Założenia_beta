@@ -4,6 +4,7 @@ Projekt RAINBOW CODING ma na celu stworzenie platformy aplikacji internetowej, k
 Platforma będzie w sposób intuicyjny zaznaczała (kolorowała) składnie programów.
 Aplikacja będzie pozwalała na dodawanie do fragmentów kodu notatek, które posłużą programiście w lepszym zrozumieniu kodu w późniejszej fazie projektowej podczas jej analizy, bądź innemu deweloperowi ze wskazówkami, co pozostało do zrobienia.
 Platforma internetowa zrewolucjonizuję pracę grupową podczas tworzenia aplikacji, nie tyle ułatwiając komunikację użytkowników, co wręcz integrując ich ze sobą. Pozwoli na swobodną analizę poprzednich wersji kodu, jak i jego kompletny przegląd przez testerów.
+Pracownicy będą w stanie komunikować się ze sobą za pomocą wbudowanego komunikatora.
 
 TODO:
 Lista z wyborem języka kodzenia i co za tym pójdzie kolorowanie jego składni. – Do decyzji ile ich będzie.
