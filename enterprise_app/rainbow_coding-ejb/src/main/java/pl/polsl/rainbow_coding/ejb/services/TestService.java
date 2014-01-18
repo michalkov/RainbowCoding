@@ -87,6 +87,8 @@ public class TestService implements Serializable {
             Note note = new Note();
             note.setContent("test note");
             note.setIdFile(file);
+            noteFacade.create(note);
+            logger.info("Note created successfully.");
             
             noteFacade.remove(note);
             logger.info("Note removed successfully.");
