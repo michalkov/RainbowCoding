@@ -1,125 +1,150 @@
-CREATE SEQUENCE jezyk_id_seq INCREMENT 1 START 1
+DROP TABLE IF EXISTS file CASCADE
+;
+DROP SEQUENCE IF EXISTS file_id_seq
+;
+DROP TABLE IF EXISTS language CASCADE
+;
+DROP SEQUENCE IF EXISTS language_id_seq
+;
+DROP TABLE IF EXISTS note CASCADE
+;
+DROP SEQUENCE IF EXISTS note_id_seq
+;
+DROP TABLE IF EXISTS operator CASCADE
+;
+DROP SEQUENCE IF EXISTS operator_id_seq
+;
+DROP TABLE IF EXISTS project CASCADE
+;
+DROP SEQUENCE IF EXISTS project_id_seq
+;
+DROP TABLE IF EXISTS role CASCADE
+;
+DROP SEQUENCE IF EXISTS role_id_seq
 ;
 
-CREATE TABLE jezyk ( 
-	id bigint DEFAULT nextval(('jezyk_id_seq'::text)::regclass) NOT NULL,
-	nazwa varchar(50) NOT NULL,
-	opis varchar(255)
+CREATE SEQUENCE file_id_seq INCREMENT 1 START 1
+;
+
+CREATE TABLE file ( 
+	id bigint DEFAULT nextval(('file_id_seq'::text)::regclass) NOT NULL,
+	id_language bigint,
+	id_project bigint,
+	content text NOT NULL,
+	prev_version text
 )
 ;
 
-CREATE SEQUENCE notatka_id_seq INCREMENT 1 START 1
+CREATE SEQUENCE language_id_seq INCREMENT 1 START 1
 ;
 
-CREATE TABLE notatka ( 
-	id bigint DEFAULT nextval(('notatka_id_seq'::text)::regclass) NOT NULL,
-	id_plik bigint,
-	tresc varchar(255) NOT NULL
+CREATE TABLE language ( 
+	id bigint DEFAULT nextval(('language_id_seq'::text)::regclass) NOT NULL,
+	name varchar(50) NOT NULL,
+	description varchar(255)
 )
 ;
 
-CREATE SEQUENCE plik_id_seq INCREMENT 1 START 1
+CREATE SEQUENCE note_id_seq INCREMENT 1 START 1
 ;
 
-CREATE TABLE plik ( 
-	id bigint DEFAULT nextval(('plik_id_seq'::text)::regclass) NOT NULL,
-	id_jezyk bigint,
-	id_projekt bigint,
-	tresc text NOT NULL,
-	pop_wersja text
+CREATE TABLE note ( 
+	id bigint DEFAULT nextval(('note_id_seq'::text)::regclass) NOT NULL,
+	id_file bigint,
+	content varchar(255) NOT NULL
 )
 ;
 
-CREATE SEQUENCE projekt_id_seq INCREMENT 1 START 1
+CREATE SEQUENCE operator_id_seq INCREMENT 1 START 1
 ;
 
-CREATE TABLE projekt ( 
-	id bigint DEFAULT nextval(('projekt_id_seq'::text)::regclass) NOT NULL,
-	id_uzytkownik bigint,
-	nazwa varchar(100) NOT NULL,
-	opis varchar(255)
-)
-;
-
-CREATE SEQUENCE rola_id_seq INCREMENT 1 START 1
-;
-
-CREATE TABLE rola ( 
-	id bigint DEFAULT nextval(('rola_id_seq'::text)::regclass) NOT NULL,
-	nazwa varchar(50) NOT NULL,
-	opis varchar(255)
-)
-;
-
-CREATE SEQUENCE uzytkownik_id_seq INCREMENT 1 START 1
-;
-
-CREATE TABLE uzytkownik ( 
-	id bigint DEFAULT nextval(('uzytkownik_id_seq'::text)::regclass) NOT NULL,
-	id_rola bigint,
+CREATE TABLE operator ( 
+	id bigint DEFAULT nextval(('operator_id_seq'::text)::regclass) NOT NULL,
+	id_role bigint,
 	login varchar(50) NOT NULL,
-	haslo varchar(50) NOT NULL
+	password varchar(50) NOT NULL
+)
+;
+
+CREATE SEQUENCE project_id_seq INCREMENT 1 START 1
+;
+
+CREATE TABLE project ( 
+	id bigint DEFAULT nextval(('project_id_seq'::text)::regclass) NOT NULL,
+	id_operator bigint,
+	name varchar(100) NOT NULL,
+	description varchar(255)
+)
+;
+
+CREATE SEQUENCE role_id_seq INCREMENT 1 START 1
+;
+
+CREATE TABLE role ( 
+	id bigint DEFAULT nextval(('role_id_seq'::text)::regclass) NOT NULL,
+	name varchar(50) NOT NULL,
+	description varchar(255)
 )
 ;
 
 
-ALTER TABLE jezyk
-	ADD CONSTRAINT uq_jezyk_nazwa UNIQUE (nazwa)
+ALTER TABLE language
+	ADD CONSTRAINT uq_language_name UNIQUE (name)
 ;
-ALTER TABLE rola
-	ADD CONSTRAINT uq_rola_nazwa UNIQUE (nazwa)
+ALTER TABLE operator
+	ADD CONSTRAINT uq_operator_login UNIQUE (login)
 ;
-ALTER TABLE uzytkownik
-	ADD CONSTRAINT uq_uzytkownik_login UNIQUE (login)
+ALTER TABLE role
+	ADD CONSTRAINT uq_role_name UNIQUE (name)
 ;
-ALTER TABLE jezyk ADD CONSTRAINT pk_jezyk 
+ALTER TABLE file ADD CONSTRAINT pk_file 
 	PRIMARY KEY (id)
 ;
 
 
-ALTER TABLE notatka ADD CONSTRAINT pk_notatka 
+ALTER TABLE language ADD CONSTRAINT pk_language 
 	PRIMARY KEY (id)
 ;
 
 
-ALTER TABLE plik ADD CONSTRAINT pk_plik 
+ALTER TABLE note ADD CONSTRAINT pk_note 
 	PRIMARY KEY (id)
 ;
 
 
-ALTER TABLE projekt ADD CONSTRAINT pk_projekt 
+ALTER TABLE operator ADD CONSTRAINT pk_operator 
 	PRIMARY KEY (id)
 ;
 
 
-ALTER TABLE rola ADD CONSTRAINT pk_rola 
+ALTER TABLE project ADD CONSTRAINT pk_project 
 	PRIMARY KEY (id)
 ;
 
 
-ALTER TABLE uzytkownik ADD CONSTRAINT pk_uzytkownik 
+ALTER TABLE role ADD CONSTRAINT pk_role 
 	PRIMARY KEY (id)
 ;
 
 
 
 
-ALTER TABLE notatka ADD CONSTRAINT fk_notatka_plik 
-	FOREIGN KEY (id_plik) REFERENCES plik (id)
+ALTER TABLE file ADD CONSTRAINT fk_file_language 
+	FOREIGN KEY (id_language) REFERENCES language (id)
 ;
 
-ALTER TABLE plik ADD CONSTRAINT fk_plik_jezyk 
-	FOREIGN KEY (id_jezyk) REFERENCES jezyk (id)
+ALTER TABLE file ADD CONSTRAINT fk_file_project 
+	FOREIGN KEY (id_project) REFERENCES project (id)
 ;
 
-ALTER TABLE plik ADD CONSTRAINT fk_plik_projekt 
-	FOREIGN KEY (id_projekt) REFERENCES projekt (id)
+ALTER TABLE note ADD CONSTRAINT fk_note_file 
+	FOREIGN KEY (id_file) REFERENCES file (id)
 ;
 
-ALTER TABLE projekt ADD CONSTRAINT fk_projekt_uzytkownik 
-	FOREIGN KEY (id_uzytkownik) REFERENCES uzytkownik (id)
+ALTER TABLE operator ADD CONSTRAINT fk_operator_role 
+	FOREIGN KEY (id_role) REFERENCES role (id)
 ;
 
-ALTER TABLE uzytkownik ADD CONSTRAINT fk_uzytkownik_rola 
-	FOREIGN KEY (id_rola) REFERENCES rola (id)
+ALTER TABLE project ADD CONSTRAINT fk_project_operator 
+	FOREIGN KEY (id_operator) REFERENCES operator (id)
 ;
