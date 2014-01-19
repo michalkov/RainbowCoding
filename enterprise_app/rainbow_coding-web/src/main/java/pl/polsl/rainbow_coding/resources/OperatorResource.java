@@ -17,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import pl.polsl.rainbow_coding.ejb.OperatorFacade;
 import pl.polsl.rainbow_coding.ejb.entities.Operator;
 
@@ -27,40 +28,41 @@ import pl.polsl.rainbow_coding.ejb.entities.Operator;
 @Stateless
 @LocalBean
 @Path("/operators")
+@Produces(MediaType.APPLICATION_XML)
 public class OperatorResource {
 
     @EJB
     private OperatorFacade facade;
 
     @GET
-    @Produces(MediaType.APPLICATION_XML)
     public List<Operator> get() {
         return facade.findAll();
     }
 
     @GET
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_XML)
     public Operator get(@PathParam("id") Long id) {
         return facade.find(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public void insert(Operator entity) {
+    public Operator insert(Operator entity) {
         facade.create(entity);
+        return entity;
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public void update(Operator entity) {
+    public Operator update(Operator entity) {
         facade.edit(entity);
+        return entity;
     }
 
     @DELETE
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_XML)
-    public void delete(@PathParam("id") Long id) {
+    public Response delete(@PathParam("id") Long id) {
         facade.remove(facade.find(id));
+        return Response.ok().type(MediaType.APPLICATION_XML).build();
     }
 }

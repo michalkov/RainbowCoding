@@ -51,7 +51,7 @@ public class Language implements Serializable {
     @Size(max = 255)
     @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "idLanguage")
+    @OneToMany(mappedBy = "language")
     private List<File> fileList;
 
     public Language() {

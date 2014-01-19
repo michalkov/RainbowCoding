@@ -55,11 +55,11 @@ public class File implements Serializable {
     private String prevVersion;
     @JoinColumn(name = "id_project", referencedColumnName = "id")
     @ManyToOne
-    private Project idProject;
+    private Project project;
     @JoinColumn(name = "id_language", referencedColumnName = "id")
     @ManyToOne
-    private Language idLanguage;
-    @OneToMany(mappedBy = "idFile")
+    private Language language;
+    @OneToMany(mappedBy = "file")
     private List<Note> noteList;
 
     public File() {
@@ -98,20 +98,20 @@ public class File implements Serializable {
         this.prevVersion = prevVersion;
     }
 
-    public Project getIdProject() {
-        return idProject;
+    public Project getProject() {
+        return project;
     }
 
-    public void setIdProject(Project idProject) {
-        this.idProject = idProject;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
-    public Language getIdLanguage() {
-        return idLanguage;
+    public Language getLanguage() {
+        return language;
     }
 
-    public void setIdLanguage(Language idLanguage) {
-        this.idLanguage = idLanguage;
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     @XmlTransient

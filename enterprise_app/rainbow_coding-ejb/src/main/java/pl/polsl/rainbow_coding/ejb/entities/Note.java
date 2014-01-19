@@ -48,7 +48,7 @@ public class Note implements Serializable {
     private String content;
     @JoinColumn(name = "id_file", referencedColumnName = "id")
     @ManyToOne
-    private File idFile;
+    private File file;
 
     public Note() {
     }
@@ -78,12 +78,12 @@ public class Note implements Serializable {
         this.content = content;
     }
 
-    public File getIdFile() {
-        return idFile;
+    public File getFile() {
+        return file;
     }
 
-    public void setIdFile(File idFile) {
-        this.idFile = idFile;
+    public void setFile(File file) {
+        this.file = file;
     }
 
     @Override

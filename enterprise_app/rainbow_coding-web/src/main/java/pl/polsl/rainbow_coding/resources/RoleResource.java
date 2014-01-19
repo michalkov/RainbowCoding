@@ -17,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import pl.polsl.rainbow_coding.ejb.RoleFacade;
 import pl.polsl.rainbow_coding.ejb.entities.Role;
 
@@ -27,40 +28,41 @@ import pl.polsl.rainbow_coding.ejb.entities.Role;
 @Stateless
 @LocalBean
 @Path("/roles")
+@Produces(MediaType.APPLICATION_XML)
 public class RoleResource {
 
     @EJB
     private RoleFacade facade;
 
     @GET
-    @Produces(MediaType.APPLICATION_XML)
     public List<Role> get() {
         return facade.findAll();
     }
 
     @GET
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_XML)
     public Role get(@PathParam("id") Long id) {
         return facade.find(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public void insert(Role entity) {
+    public Role insert(Role entity) {
         facade.create(entity);
+        return entity;
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public void update(Role entity) {
+    public Role update(Role entity) {
         facade.edit(entity);
+        return entity;
     }
 
     @DELETE
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_XML)
-    public void delete(@PathParam("id") Long id) {
+    public Response delete(@PathParam("id") Long id) {
         facade.remove(facade.find(id));
+        return Response.ok().type(MediaType.APPLICATION_XML).build();
     }
 }

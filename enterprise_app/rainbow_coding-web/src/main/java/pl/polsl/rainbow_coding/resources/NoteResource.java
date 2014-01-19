@@ -17,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import pl.polsl.rainbow_coding.ejb.NoteFacade;
 import pl.polsl.rainbow_coding.ejb.entities.Note;
 
@@ -27,45 +28,41 @@ import pl.polsl.rainbow_coding.ejb.entities.Note;
 @Stateless
 @LocalBean
 @Path("/notes")
+@Produces(MediaType.APPLICATION_XML)
 public class NoteResource {
 
     @EJB
     private NoteFacade facade;
-    
+
     @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public List<Note> get()
-    {
+    public List<Note> get() {
         return facade.findAll();
     }
-    
+
     @GET
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_XML)
-    public Note get(@PathParam("id") Long id)
-    {
+    public Note get(@PathParam("id") Long id) {
         return facade.find(id);
     }
-    
+
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public void insert(Note entity)
-    {
+    public Note insert(Note entity) {
         facade.create(entity);
+        return entity;
     }
-    
+
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public void update(Note entity)
-    {
+    public Note update(Note entity) {
         facade.edit(entity);
+        return entity;
     }
-    
+
     @DELETE
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_XML)
-    public void delete(@PathParam("id") Long id)
-    {
+    public Response delete(@PathParam("id") Long id) {
         facade.remove(facade.find(id));
+        return Response.ok().type(MediaType.APPLICATION_XML).build();
     }
 }

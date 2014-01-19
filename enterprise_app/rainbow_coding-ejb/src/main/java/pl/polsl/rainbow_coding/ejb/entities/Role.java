@@ -51,7 +51,7 @@ public class Role implements Serializable {
     @Size(max = 255)
     @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "idRole")
+    @OneToMany(mappedBy = "role")
     private List<Operator> operatorList;
 
     public Role() {

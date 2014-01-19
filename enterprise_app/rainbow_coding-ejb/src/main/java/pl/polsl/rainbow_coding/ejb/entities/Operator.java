@@ -55,11 +55,11 @@ public class Operator implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "password")
     private String password;
-    @OneToMany(mappedBy = "idOperator")
+    @OneToMany(mappedBy = "operator")
     private List<Project> projectList;
     @JoinColumn(name = "id_role", referencedColumnName = "id")
     @ManyToOne
-    private Role idRole;
+    private Role role;
 
     public Operator() {
     }
@@ -107,12 +107,12 @@ public class Operator implements Serializable {
         this.projectList = projectList;
     }
 
-    public Role getIdRole() {
-        return idRole;
+    public Role getRole() {
+        return role;
     }
 
-    public void setIdRole(Role idRole) {
-        this.idRole = idRole;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

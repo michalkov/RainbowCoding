@@ -55,8 +55,8 @@ public class Project implements Serializable {
     private String description;
     @JoinColumn(name = "id_operator", referencedColumnName = "id")
     @ManyToOne
-    private Operator idOperator;
-    @OneToMany(mappedBy = "idProject")
+    private Operator operator;
+    @OneToMany(mappedBy = "project")
     private List<File> fileList;
 
     public Project() {
@@ -95,12 +95,12 @@ public class Project implements Serializable {
         this.description = description;
     }
 
-    public Operator getIdOperator() {
-        return idOperator;
+    public Operator getOperator() {
+        return operator;
     }
 
-    public void setIdOperator(Operator idOperator) {
-        this.idOperator = idOperator;
+    public void setOperator(Operator operator) {
+        this.operator = operator;
     }
 
     @XmlTransient

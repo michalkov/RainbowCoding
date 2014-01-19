@@ -30,7 +30,7 @@ import pl.polsl.rainbow_coding.ejb.entities.Role;
  */
 @Singleton
 @LocalBean
-@Startup
+//@Startup
 public class TestService implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -66,27 +66,27 @@ public class TestService implements Serializable {
             Operator operator = new Operator();
             operator.setLogin("user");
             operator.setPassword("pass");
-            operator.setIdRole(role);
+            operator.setRole(role);
             operatorFacade.create(operator);
             logger.info("Operator created successfully.");
             
             Project project = new Project();
             project.setDescription("test project");
             project.setName("ProJect");
-            project.setIdOperator(operator);
+            project.setOperator(operator);
             projectFacade.create(project);
             logger.info("Project created successfully.");
             
             File file = new File();
             file.setContent("test content");
-            file.setIdLanguage(language);
-            file.setIdProject(project);
+            file.setLanguage(language);
+            file.setProject(project);
             fileFacade.create(file);
             logger.info("File created successfully.");
             
             Note note = new Note();
             note.setContent("test note");
-            note.setIdFile(file);
+            note.setFile(file);
             noteFacade.create(note);
             logger.info("Note created successfully.");
             

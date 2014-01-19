@@ -17,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import pl.polsl.rainbow_coding.ejb.FileFacade;
 import pl.polsl.rainbow_coding.ejb.entities.File;
 
@@ -27,40 +28,41 @@ import pl.polsl.rainbow_coding.ejb.entities.File;
 @Stateless
 @LocalBean
 @Path("/files")
+@Produces(MediaType.APPLICATION_XML)
 public class FileResource {
 
     @EJB
     private FileFacade facade;
 
     @GET
-    @Produces(MediaType.APPLICATION_XML)
     public List<File> get() {
         return facade.findAll();
     }
 
     @GET
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_XML)
     public File get(@PathParam("id") Long id) {
         return facade.find(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public void insert(File entity) {
+    public File insert(File entity) {
         facade.create(entity);
+        return entity;
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public void update(File entity) {
+    public File update(File entity) {
         facade.edit(entity);
+        return entity;
     }
 
     @DELETE
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_XML)
-    public void delete(@PathParam("id") Long id) {
+    public Response delete(@PathParam("id") Long id) {
         facade.remove(facade.find(id));
+        return Response.ok().type(MediaType.APPLICATION_XML).build();
     }
 }
