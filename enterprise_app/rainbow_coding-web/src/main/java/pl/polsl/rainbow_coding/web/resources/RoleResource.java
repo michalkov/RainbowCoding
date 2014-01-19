@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.polsl.rainbow_coding.resources;
+package pl.polsl.rainbow_coding.web.resources;
 
 import java.util.List;
 import javax.ejb.EJB;
@@ -18,8 +18,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pl.polsl.rainbow_coding.ejb.OperatorFacade;
-import pl.polsl.rainbow_coding.ejb.entities.Operator;
+import pl.polsl.rainbow_coding.ejb.RoleFacade;
+import pl.polsl.rainbow_coding.ejb.entities.Role;
 
 /**
  *
@@ -27,34 +27,34 @@ import pl.polsl.rainbow_coding.ejb.entities.Operator;
  */
 @Stateless
 @LocalBean
-@Path("/operators")
+@Path("/roles")
 @Produces(MediaType.APPLICATION_XML)
-public class OperatorResource {
+public class RoleResource {
 
     @EJB
-    private OperatorFacade facade;
+    private RoleFacade facade;
 
     @GET
-    public List<Operator> get() {
+    public List<Role> get() {
         return facade.findAll();
     }
 
     @GET
     @Path("/{id}")
-    public Operator get(@PathParam("id") Long id) {
+    public Role get(@PathParam("id") Long id) {
         return facade.find(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public Operator insert(Operator entity) {
+    public Role insert(Role entity) {
         facade.create(entity);
         return entity;
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public Operator update(Operator entity) {
+    public Role update(Role entity) {
         facade.edit(entity);
         return entity;
     }

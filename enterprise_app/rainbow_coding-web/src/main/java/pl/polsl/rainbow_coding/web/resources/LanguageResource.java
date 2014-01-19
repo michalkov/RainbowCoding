@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.polsl.rainbow_coding.resources;
+package pl.polsl.rainbow_coding.web.resources;
 
 import java.util.List;
 import javax.ejb.EJB;

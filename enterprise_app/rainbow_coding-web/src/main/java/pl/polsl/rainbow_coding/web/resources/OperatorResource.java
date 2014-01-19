@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.polsl.rainbow_coding.resources;
+package pl.polsl.rainbow_coding.web.resources;
 
 import java.util.List;
 import javax.ejb.EJB;
@@ -18,8 +18,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pl.polsl.rainbow_coding.ejb.NoteFacade;
-import pl.polsl.rainbow_coding.ejb.entities.Note;
+import pl.polsl.rainbow_coding.ejb.OperatorFacade;
+import pl.polsl.rainbow_coding.ejb.entities.Operator;
 
 /**
  *
@@ -27,34 +27,34 @@ import pl.polsl.rainbow_coding.ejb.entities.Note;
  */
 @Stateless
 @LocalBean
-@Path("/notes")
+@Path("/operators")
 @Produces(MediaType.APPLICATION_XML)
-public class NoteResource {
+public class OperatorResource {
 
     @EJB
-    private NoteFacade facade;
+    private OperatorFacade facade;
 
     @GET
-    public List<Note> get() {
+    public List<Operator> get() {
         return facade.findAll();
     }
 
     @GET
     @Path("/{id}")
-    public Note get(@PathParam("id") Long id) {
+    public Operator get(@PathParam("id") Long id) {
         return facade.find(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public Note insert(Note entity) {
+    public Operator insert(Operator entity) {
         facade.create(entity);
         return entity;
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public Note update(Note entity) {
+    public Operator update(Operator entity) {
         facade.edit(entity);
         return entity;
     }

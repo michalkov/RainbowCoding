@@ -7,8 +7,29 @@
         </servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+<!--    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>pl.polsl.rainbow_coding.web.servlets.LoginServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>pl.polsl.rainbow_coding.web.servlets.LogoutServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>-->
     <servlet-mapping>
         <servlet-name>Jersey Web Application</servlet-name>
         <url-pattern>/rc_api/*</url-pattern>
     </servlet-mapping>
+<!--    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>480</session-timeout>
+    </session-config>-->
 </web-app>

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.polsl.rainbow_coding.resources;
+package pl.polsl.rainbow_coding.web.resources;
 
 import java.util.List;
 import javax.ejb.EJB;
@@ -18,8 +18,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pl.polsl.rainbow_coding.ejb.ProjectFacade;
-import pl.polsl.rainbow_coding.ejb.entities.Project;
+import pl.polsl.rainbow_coding.ejb.NoteFacade;
+import pl.polsl.rainbow_coding.ejb.entities.Note;
 
 /**
  *
@@ -27,34 +27,34 @@ import pl.polsl.rainbow_coding.ejb.entities.Project;
  */
 @Stateless
 @LocalBean
-@Path("/projects")
+@Path("/notes")
 @Produces(MediaType.APPLICATION_XML)
-public class ProjectResource {
+public class NoteResource {
 
     @EJB
-    private ProjectFacade facade;
+    private NoteFacade facade;
 
     @GET
-    public List<Project> get() {
+    public List<Note> get() {
         return facade.findAll();
     }
 
     @GET
     @Path("/{id}")
-    public Project get(@PathParam("id") Long id) {
+    public Note get(@PathParam("id") Long id) {
         return facade.find(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public Project insert(Project entity) {
+    public Note insert(Note entity) {
         facade.create(entity);
         return entity;
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public Project update(Project entity) {
+    public Note update(Note entity) {
         facade.edit(entity);
         return entity;
     }

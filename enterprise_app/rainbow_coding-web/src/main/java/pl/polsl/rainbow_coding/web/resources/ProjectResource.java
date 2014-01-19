@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.polsl.rainbow_coding.resources;
+package pl.polsl.rainbow_coding.web.resources;
 
 import java.util.List;
 import javax.ejb.EJB;
@@ -18,8 +18,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pl.polsl.rainbow_coding.ejb.RoleFacade;
-import pl.polsl.rainbow_coding.ejb.entities.Role;
+import pl.polsl.rainbow_coding.ejb.ProjectFacade;
+import pl.polsl.rainbow_coding.ejb.entities.Project;
 
 /**
  *
@@ -27,34 +27,34 @@ import pl.polsl.rainbow_coding.ejb.entities.Role;
  */
 @Stateless
 @LocalBean
-@Path("/roles")
+@Path("/projects")
 @Produces(MediaType.APPLICATION_XML)
-public class RoleResource {
+public class ProjectResource {
 
     @EJB
-    private RoleFacade facade;
+    private ProjectFacade facade;
 
     @GET
-    public List<Role> get() {
+    public List<Project> get() {
         return facade.findAll();
     }
 
     @GET
     @Path("/{id}")
-    public Role get(@PathParam("id") Long id) {
+    public Project get(@PathParam("id") Long id) {
         return facade.find(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public Role insert(Role entity) {
+    public Project insert(Project entity) {
         facade.create(entity);
         return entity;
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public Role update(Role entity) {
+    public Project update(Project entity) {
         facade.edit(entity);
         return entity;
     }

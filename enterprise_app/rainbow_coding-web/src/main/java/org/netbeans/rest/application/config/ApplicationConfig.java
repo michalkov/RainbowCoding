@@ -37,11 +37,11 @@ public class ApplicationConfig extends Application {
      * resources defined in the project.
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(pl.polsl.rainbow_coding.resources.FileResource.class);
-        resources.add(pl.polsl.rainbow_coding.resources.LanguageResource.class);
-        resources.add(pl.polsl.rainbow_coding.resources.NoteResource.class);
-        resources.add(pl.polsl.rainbow_coding.resources.OperatorResource.class);
-        resources.add(pl.polsl.rainbow_coding.resources.ProjectResource.class);
-        resources.add(pl.polsl.rainbow_coding.resources.RoleResource.class);
+        resources.add(pl.polsl.rainbow_coding.web.resources.FileResource.class);
+        resources.add(pl.polsl.rainbow_coding.web.resources.LanguageResource.class);
+        resources.add(pl.polsl.rainbow_coding.web.resources.NoteResource.class);
+        resources.add(pl.polsl.rainbow_coding.web.resources.OperatorResource.class);
+        resources.add(pl.polsl.rainbow_coding.web.resources.ProjectResource.class);
+        resources.add(pl.polsl.rainbow_coding.web.resources.RoleResource.class);
     }
 }
