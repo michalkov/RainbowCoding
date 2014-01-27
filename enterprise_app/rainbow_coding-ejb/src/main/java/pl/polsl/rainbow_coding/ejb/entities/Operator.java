@@ -23,6 +23,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -34,7 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Operator.findAll", query = "SELECT o FROM Operator o"),
-    @NamedQuery(name = "Operator.findById", query = "SELECT o FROM Operator o WHERE o.id = :id"),
     @NamedQuery(name = "Operator.findByLogin", query = "SELECT o FROM Operator o WHERE o.login = :login"),
     @NamedQuery(name = "Operator.findByPassword", query = "SELECT o FROM Operator o WHERE o.password = :password")})
 public class Operator implements Serializable {
@@ -56,6 +57,7 @@ public class Operator implements Serializable {
     @Column(name = "password")
     private String password;
     @OneToMany(mappedBy = "operator")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Project> projectList;
     @JoinColumn(name = "id_role", referencedColumnName = "id")
     @ManyToOne

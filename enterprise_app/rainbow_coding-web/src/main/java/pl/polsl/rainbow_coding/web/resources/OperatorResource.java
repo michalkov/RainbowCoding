@@ -44,6 +44,12 @@ public class OperatorResource {
     public Operator get(@PathParam("id") Long id) {
         return facade.find(id);
     }
+    
+    @GET
+    @Path("/by_role/{id}")
+    public List<Operator> getByRole(@PathParam("id") Long id) {
+        return facade.findByRole(id);
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)

@@ -4,12 +4,15 @@
  */
 package pl.polsl.rainbow_coding.ejb;
 
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import pl.polsl.rainbow_coding.ejb.entities.File;
 import pl.polsl.rainbow_coding.ejb.entities.Note;
 
 /**
@@ -23,6 +26,8 @@ public class NoteFacade extends AbstractFacade<Note> {
 
     @PersistenceContext(unitName = "rainbow_coding_pu")
     private EntityManager em;
+    @EJB
+    private FileFacade fileFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -31,5 +36,10 @@ public class NoteFacade extends AbstractFacade<Note> {
 
     public NoteFacade() {
         super(Note.class);
+    }
+    
+    public List<Note> findByFile(Object id)
+    {
+        return fileFacade.find(id).getNoteList();
     }
 }

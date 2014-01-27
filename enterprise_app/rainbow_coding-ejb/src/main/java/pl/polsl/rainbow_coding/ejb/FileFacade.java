@@ -4,6 +4,8 @@
  */
 package pl.polsl.rainbow_coding.ejb;
 
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.TransactionAttribute;
@@ -23,6 +25,10 @@ public class FileFacade extends AbstractFacade<File> {
 
     @PersistenceContext(unitName = "rainbow_coding_pu")
     private EntityManager em;
+    @EJB
+    private LanguageFacade languageFacade;
+    @EJB
+    private ProjectFacade projectFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -31,5 +37,15 @@ public class FileFacade extends AbstractFacade<File> {
 
     public FileFacade() {
         super(File.class);
+    }
+    
+    public List<File> findByLanguage(Object id)
+    {
+        return languageFacade.find(id).getFileList();
+    }
+    
+    public List<File> findByProject(Object id)
+    {
+        return projectFacade.find(id).getFileList();
     }
 }

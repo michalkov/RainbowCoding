@@ -23,6 +23,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -34,7 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "File.findAll", query = "SELECT f FROM File f"),
-    @NamedQuery(name = "File.findById", query = "SELECT f FROM File f WHERE f.id = :id"),
     @NamedQuery(name = "File.findByContent", query = "SELECT f FROM File f WHERE f.content = :content"),
     @NamedQuery(name = "File.findByPrevVersion", query = "SELECT f FROM File f WHERE f.prevVersion = :prevVersion")})
 public class File implements Serializable {
@@ -60,6 +61,7 @@ public class File implements Serializable {
     @ManyToOne
     private Language language;
     @OneToMany(mappedBy = "file")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Note> noteList;
 
     public File() {

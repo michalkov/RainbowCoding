@@ -4,6 +4,8 @@
  */
 package pl.polsl.rainbow_coding.ejb;
 
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.TransactionAttribute;
@@ -23,6 +25,8 @@ public class ProjectFacade extends AbstractFacade<Project> {
 
     @PersistenceContext(unitName = "rainbow_coding_pu")
     private EntityManager em;
+    @EJB
+    private OperatorFacade operatorFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -31,5 +35,10 @@ public class ProjectFacade extends AbstractFacade<Project> {
 
     public ProjectFacade() {
         super(Project.class);
+    }
+    
+    public List<Project> findByOperator(Object id)
+    {
+        return operatorFacade.find(id).getProjectList();
     }
 }

@@ -44,6 +44,18 @@ public class FileResource {
     public File get(@PathParam("id") Long id) {
         return facade.find(id);
     }
+    
+    @GET
+    @Path("/by_language/{id}")
+    public List<File> getByLanguage(@PathParam("id") Long id) {
+        return facade.findByLanguage(id);
+    }
+    
+    @GET
+    @Path("/by_project/{id}")
+    public List<File> getByProject(@PathParam("id") Long id) {
+        return facade.findByProject(id);
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)

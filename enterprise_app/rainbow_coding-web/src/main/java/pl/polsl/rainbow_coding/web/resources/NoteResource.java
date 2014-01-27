@@ -44,6 +44,12 @@ public class NoteResource {
     public Note get(@PathParam("id") Long id) {
         return facade.find(id);
     }
+    
+    @GET
+    @Path("/by_file/{id}")
+    public List<Note> getByFile(@PathParam("id") Long id) {
+        return facade.findByFile(id);
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)

@@ -6,6 +6,7 @@ package pl.polsl.rainbow_coding.ejb;
 
 import java.util.List;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
 import javax.ejb.Singleton;
@@ -29,6 +30,8 @@ public class OperatorFacade extends AbstractFacade<Operator> {
     private EntityManager em;
     @Resource
     private SessionContext context;
+    @EJB
+    private RoleFacade roleFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -37,6 +40,11 @@ public class OperatorFacade extends AbstractFacade<Operator> {
 
     public OperatorFacade() {
         super(Operator.class);
+    }
+    
+    public List<Operator> findByRole(Object id)
+    {
+        return roleFacade.find(id).getOperatorList();
     }
 
     public Operator find(String login) {

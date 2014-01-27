@@ -21,6 +21,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -32,7 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Language.findAll", query = "SELECT l FROM Language l"),
-    @NamedQuery(name = "Language.findById", query = "SELECT l FROM Language l WHERE l.id = :id"),
     @NamedQuery(name = "Language.findByName", query = "SELECT l FROM Language l WHERE l.name = :name"),
     @NamedQuery(name = "Language.findByDescription", query = "SELECT l FROM Language l WHERE l.description = :description")})
 public class Language implements Serializable {
@@ -52,6 +53,7 @@ public class Language implements Serializable {
     @Column(name = "description")
     private String description;
     @OneToMany(mappedBy = "language")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<File> fileList;
 
     public Language() {

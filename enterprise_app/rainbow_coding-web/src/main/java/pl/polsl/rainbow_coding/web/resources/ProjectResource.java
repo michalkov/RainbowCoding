@@ -44,6 +44,12 @@ public class ProjectResource {
     public Project get(@PathParam("id") Long id) {
         return facade.find(id);
     }
+    
+    @GET
+    @Path("/by_operator/{id}")
+    public List<Project> getByOperator(@PathParam("id") Long id) {
+        return facade.findByOperator(id);
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
