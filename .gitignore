@@ -1,2 +1,4 @@
 /enterprise_app/rainbow_coding-ejb/target/
 /enterprise_app/rainbow_coding-web/target/
+/enterprise_app/rainbow_coding-ear/target/maven-archiver
+/enterprise_app/rainbow_coding-ear/target/rainbow_coding-ear-1.0
