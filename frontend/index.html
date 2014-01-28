@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Rainbow Coding</title>
+<link rel="stylesheet" type="text/css" href="css/menu-style.css"/>
+<link rel="stylesheet" type="text/css" href="css/toolbox-style.css"/>
+<link rel="stylesheet" type="text/css" href="css/general.css"/>
+<link rel="stylesheet" type="text/css" href="css/codemirror.css"/>
+<script src="js/jquery-2.0.3.min.js"></script>
+<script src="js/code.js"></script>
+<script src="js/general.js"></script>
+<script src="js/codemirror.js"></script>
+<script src="js/mode/clike/clike.js"></script>
+<script src="js/mode/python/python.js"></script>
+<script src="js/mode/ruby/ruby.js"></script>
+</head>
+<body>
+
+<div id="document-title"><span>Document Title</span></div>
+<div id='cssmenu'>
+<ul>
+   <li class='has-sub-top'><a href='#'><span>File</span></a>
+   	<ul>
+    	<li><a href='#'><span>New</span></a></li>
+        <li>
+        	<input type="file" id="open-file-input" name="open-file-input" style="visibility: hidden; width: 1px; height: 1px" />
+        	<a href='#' id="open-file-button"><span>Open...</span></a>
+        </li>
+        <li><span class='menu-separator'></span></li>
+        <li><a href='#'><span>Revision history</span></a></li>
+        <li><span class='menu-separator'></span></li>
+        <li><a href='#'><span>Download</span></a></li>
+        <li><span class='menu-separator'></span></li>
+        <li><a href='#'><span>Print</span></a></li>
+   	</ul>
+   </li>
+   <li class='has-sub-top'><a href='#'><span>Edit</span></a>
+      <ul>
+         <li><a href='#'><span>Undo</span></a></li>
+         <li><a href='#'><span>Redo</span></a></li>
+         <li><span class="menu-separator"></span></li>
+         <li><a href='#' id="select-all-button"><span>Select all</span></a></li>
+      </ul>
+   </li>
+   <li class='has-sub-top'><a href='#'><span>Help</span></a>
+   	<ul>
+    	<li><a href='#'><span>About</span></a></li>
+        <li><a href='#'><span>Help</span></a></li>
+    </ul>
+   </li>
+</ul>
+</div>
+<div id='csstoolbox'>
+	<ul>
+        <li><a href="#" class="button-simple" id="save-button"></a></li>
+        <li><div class="button-separator"></div></li>
+        <li><a href="#" class="button-simple" id="de-indent-button"></a></li>
+        <li><a href="#" class="button-simple" id="indent-button"></a></li>
+        <li><div class="button-separator"></div></li>
+        <li><a href="#" class="button-simple" id="comment-button"></a></li>
+        <li><div class="button-separator"></div></li>
+        <li><div id="mode-list-wrapper">
+			<select name="mode-list" id="mode-list" size="1">
+                <option value="text/x-csrc">C</option>            
+                <option value="text/x-c++src">C++</option>                
+                <option value="text/x-java">Java</option>            
+                <option value="text/x-python">Python</option>            
+                <option value="text/x-ruby">Ruby</option>
+			</select>
+			</div>
+        </li>
+    </ul>
+</div>
+<form><textarea id="code" name="code" class="code"></textarea></form>
+</body>
+</html>
