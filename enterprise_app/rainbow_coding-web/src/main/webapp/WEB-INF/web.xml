@@ -31,5 +31,29 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>480</session-timeout>
-    </session-config>-->
+    </session-config>
+    <security-constraint>
+        <display-name>HTTPS i logowanie dla wszystkich</display-name>
+        <web-resource-collection>
+            <web-resource-name>application</web-resource-name>
+            <description>Cała aplikacja</description>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>tylko zalogowani</description>
+            <role-name>USERS</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description>wymaga ssl</description>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>RainbowCodingRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/login</form-login-page>
+            <form-error-page>/error.html</form-error-page>
+        </form-login-config>
+    </login-config>-->
 </web-app>
