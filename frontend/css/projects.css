@@ -16,8 +16,10 @@ body {
 
 #menuContainer {
 	height:100%;
-	width:25%;
+	width:auto;
 	float:left;	
+	padding-right: 30px;
+	padding-left: 10px;
 }
 
 #menu {
@@ -69,8 +71,8 @@ body {
 #my-projects-content-header {
 	color: #555555;
 	font-family: Helvetica, Arial, Verdana, sans-serif;
-  	font-size: 8px;
-	line-height: 20px;
+  	font-size: 10px;
+	line-height: 35px;
 	border-bottom: 1px solid #EBEBEB;
 	padding-left: 10px;
 }
@@ -82,6 +84,10 @@ body {
 	line-height: 20px;
 	border-bottom: 1px solid #EBEBEB;
 	padding-left: 10px;
+}
+
+#create-project-button {
+	margin-left: 10px;	
 }
 
 .project-button {
@@ -102,6 +108,58 @@ body {
 
 .project-button:active {
 	border: 1px solid #4D90FE;
+}
+
+ul {
+  list-style: none;
+}
+
+#project-list {
+	padding: 0 0;
+	margin: 0 0;
+}
+
+.project-list-row ul {
+  display: none;
+  position: relative;
+  border-left: 2px solid #3399CC;
+  margin-left: 20px;
+  margin-bottom: 4px;
+  padding: 0 0;
+
+}
+
+#project-list > li {
+	border-bottom: 1px solid #CCC
+}
+
+#project-list li:hover {
+	background: #ececec;	
+}
+
+#project-list a:hover {
+	text-decoration:underline;	
+}
+
+.project-list-row a {
+	color: black;
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+	text-decoration: none;
+	line-height: 35px;
+	font-size: 12px;
+	padding-left: 10px;
+}
+
+.file-list-row {
+	background-color: white;	
+}
+
+.file-list-row:hover {
+	background-color: white;
+}
+
+.project-list-row.active ul {
+	display: block;
 }
 
 #shared-content-header {
