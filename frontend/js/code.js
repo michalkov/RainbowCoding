@@ -8,6 +8,8 @@ var pendingSendDocumentChangesRequest = false;
 var pendingSendProjectChangesRequest = false;
 var intervalID;
 
+var documentTitleLabel;
+
 
 // Keytimer
 var delay = (function(){
@@ -144,41 +146,23 @@ $(document).ready(function($) {
 		showDialogBoxInformation("Please set correct document ID");	
 	}
 	
+	
+	documentTitleLabel = $("#document-title");
+	
 	// setInterval(sendDocumentChanges);
 });
 
 
 function initializeTitleRename(){
 	$("#document-title").click(function(){
-		showDialogBox("Rename document", 
-		"<span>Insert document name:</span>" +
-		"<input id=\"rename-input\" class=\"dialog-box-input\"" +
-		"value=\"" + $("#document-title").text() + "\">",
-		"<button id=\"rename-ok-button\" class=\"dialog-box-button\">OK</button>"+
-		"<button id=\"rename-cancel-button\" class=\"dialog-box-button\">Cancel</button>", false);
-		
-		$("#rename-cancel-button").click(function() {
-			removeDialogBox();
-		});
-		
-		$("#rename-ok-button").click(function() {
-			if($(this).attr('class') == "dialog-box-button-disabled")
-				return;
-			
-			$("#document-title").text($("#rename-input").val());
-			removeDialogBox();
-			sendProjectChanges();
-		});
-		
-		$("#rename-input").keyup(function() {
-			if($(this).val() == "")
-			{
-				$("#rename-ok-button").attr('class', 'dialog-box-button-disabled');
+		$.ajax({
+			dataType : "html",
+			url : "title.html",
+			success : function(results) {
+			   $("body").append(results);
+			   $.getScript( "js/title.js" )
 			}
-			else{
-				$("#rename-ok-button").attr('class', 'dialog-box-button');
-			}
-		});
+    	});
 	});
 }
 
@@ -217,39 +201,6 @@ function sendDocumentChangesSuccess(){
 }
 
 function sendDocumentChangesError(){
-	
-}
-
-function sendProjectChanges(){
-	// check if there are changes
-	
-	xml = xmlHeader + "<project>"+
-		"<id>" + projectID + "</id>"+
-		"<name>" + $("#document-title").text() + "</name>"+
-		"<description></description>"+
-		"</project>";
-	
-	$.ajax({
-        url: projectPath,
-        processData: false,
-        type: "PUT",
-		contentType: xmlContent,
-        data: xml,
-		timeout: 2000,
-        success: function(response){
-        	sendProjectChangesSuccess(response); 		
-        },
-        error: function(response) {
-            sendProjectChangesError(response);
-        }
-    });
-}
-
-function sendProjectChangesSuccess(response){
-	
-}
-
-function sendProjectChangesError(response){
 	
 }
 
