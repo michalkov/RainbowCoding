@@ -29,6 +29,16 @@ $(document).ready(function($) {
 		showCreateNewProjectDialogBox();
 	});
 	
+	/*$.ajax({
+        dataType : "html",
+        url : "login.html",
+        success : function(results) {
+     	   $("body").append(results);
+		   
+		   $.getScript( "js/login.js" )
+        }
+    });
+	*/
 });
 
 function showCreateNewProjectDialogBox(){
@@ -157,9 +167,18 @@ function sendNewFileRequestSuccess(response){
 }
 
 function loadProjectList(){
-	$("#content").empty();
-	var header = "<div id=\"my-projects-content-header\">TITLE</div>";
-	$("#content").append(header);
+	//$("#content").empty();
+	//var header = "<div id=\"my-projects-content-header\">TITLE</div>";
+	//$("#content").append(header);
+	
+	$(".project-list-row").each(function() {
+		var $thisRow = $(this);
+        $thisRow.click(function() {
+			toggleActiveProjectRow();
+			$thisRow.toggleClass("active");
+			$thisRow.unbind("click");
+		});
+    });
 }
 
 function loadSharedProjectList(){
@@ -173,7 +192,19 @@ function toggleActiveButtons(){
     });
 }
 
+function toggleActiveProjectRow() {
+	$(".project-list-row.active").each(function() {
+		var $thisRow = $(this);
+        $thisRow.toggleClass("active");
+		$thisRow.click(function() {
+			toggleActiveProjectRow();
+			$thisRow.toggleClass("active");
+		});
+    });
+}
+
 function ProjectRequest(name, description){
 	this.name = name;
 	this.description = description;	
 }
+
