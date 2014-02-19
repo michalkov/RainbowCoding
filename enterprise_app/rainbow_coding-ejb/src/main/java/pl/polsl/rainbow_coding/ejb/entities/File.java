@@ -36,6 +36,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "File.findAll", query = "SELECT f FROM File f"),
+    @NamedQuery(name = "File.findByName", query = "SELECT f FROM File f WHERE f.name = :name"),
     @NamedQuery(name = "File.findByContent", query = "SELECT f FROM File f WHERE f.content = :content"),
     @NamedQuery(name = "File.findByPrevVersion", query = "SELECT f FROM File f WHERE f.prevVersion = :prevVersion")})
 public class File implements Serializable {
@@ -46,6 +47,11 @@ public class File implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "name")
+    private String name;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2147483647)
@@ -82,6 +88,14 @@ public class File implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContent() {
